@@ -1,0 +1,130 @@
+BANDIT 0 -> BANDIT 1
+
+	archivo readme del escritorio
+
+BANDIT 1 -> BANDIT 2
+	
+	how to read a file dashed filename?
+
+	cat ./-
+
+BANDIR 2 -> BANDIT 3
+
+	how to read a file with spaces in filename?
+
+	cat + tabulador
+
+BANDIT 3 -> BANDIT 4
+
+	ls -la para ver archivos ocultos
+	
+	cat .hidden
+
+BANDIT 4 -> BANDIT 5
+
+	only human readable file
+
+	find inherit/ | xargs file
+	cat <file>
+
+BANDIT 5 -> BANDIT 6 
+
+	archivo 1033 bytes no ejecutable
+
+	find inhere -type f -size 1033c ! -executable
+
+	DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+BANDIT 6 -> BANDIT 7
+
+	archivo de 33 bytes del grupo de bandit6 creado por el usuario bandit7
+
+	find ../../ -size 33c -group bandit6 -user bandit7
+
+BANDIT 7 -> BANDIT 8
+
+	cat data.txt | grep "millionth"
+
+BANDIT 8 -> BANDIT 9
+
+	cat data.txt | sort | uniq -u
+
+BANDIT 9 -> BANDIT 10 
+
+	strings data.txt | grep '='
+
+BANDIT 10 -> BANDIT 11
+
+	cyberchef from base64
+
+	IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+BANDIR 11 -> BANDIT 12
+
+	cyberchef from rot13
+
+BANDIT 12 -> 13
+
+	cat data.txt | xxd -r > data
+	file data (vemos en que tipo de archivo esta comprimido)
+	mv data data2.gz
+	gzip -d data2.gz
+	file data2 (volvemos a ver la compresión)
+	mv data2 data3.bz
+	bzip2 -d data3.bz
+	file data3
+	mv data3 data4.tar
+	tar -xf data4.tar
+	file data4
+	.....
+	Así hasta obtener la pass.
+
+BANDIT 13 -> 14
+
+	ssh -i sshkey.private bandit14@localhost
+	cat /etc/bandit_pass/bandit14
+	4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+BANDIT 14 -> 15
+
+	nmap -p 30000 localhost
+	telnet localhost 30000
+
+BANDIT 15 -> 16
+	
+	openssl s_client -quiet -connect localhost:30001
+
+BANDIT 16 -> 17
+	
+	nmap -sC -sV -p 31000-32000
+	openssl s_client -quiet -connect localhost:31790
+	Devuelve una llave RSA privada copy-paste un archivo-> nano key.private -> chmod 700 key.private
+	openssl s_client -quiet -connect localhost:31790
+
+	xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
+
+
+BANDIT 17 -> 18 / 19
+
+	ssh -p 2220 -t bandit18@bandit.labs.overthewire.org /bin/sh
+	cat readme
+
+BANDIT 19 -> 20
+
+	ltrace ./bandit20-do 
+	./bandit20-do cat /etc/bandit_pass/bandit20
+
+BANDIT 20 -> 21
+	
+	First, we set up a simple TCP server which listens to port 61337 and we let the process running in the background.
+
+	echo "GbKksEFF4yrVs6il55v6gwY5aVje5f0j" | nc -l localhost -p 61337 & 
+
+	Now, we execute the setuid binary to connect localhost by 61337 port.
+
+	gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+BANDIT 21 -> 22
+
+	
+	
